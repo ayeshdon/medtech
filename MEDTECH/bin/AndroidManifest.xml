@@ -1,0 +1,63 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hseya.medtech"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="15" />
+
+    <application
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="MianMenuActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".jobcard.activity.JobCardActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".jobcard.activity.EngineerTimeDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".jobcard.activity.SignatureActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".jobcard.activity.CaptureSignature"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".jobcard.unfinished.activity.UnfinishedJobCardActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".sync.activity.SyncMainActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
+    <uses-permission android:name="android.permission." />
+</manifest>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_list"
+    android:orientation="horizontal"
+    android:padding="2dp" >
+
+    <!-- ListRow Left sied Thumbnail image -->
+
+
+    <!-- Title Of Song -->
+
+
+    <!-- Artist Name -->
+
+
+    <!-- Rightend Duration -->
+
+
+    
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="5dip" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp" />
+
+            <TextView
+                android:id="@+id/listcardID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               
+                android:text="001" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/listCusName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Ayesh nanayakkara"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow" />
+
+            </LinearLayout>
+
+                <TextView
+                    android:id="@+id/listcardDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="TextView"
+                    android:textColor="@color/txt_color"
+                    android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

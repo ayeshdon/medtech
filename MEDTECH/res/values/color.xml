@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="bg_color">#f3f3f3</color>
+    <color name="txt_color">#7fcc27</color>
+    <color name="bg_list">#e6e6e6</color>
+    <color name="balck">#fff</color>
+    <color name="sig_color">#faf7f7</color>
+
+</resources>
