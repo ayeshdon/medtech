@@ -24,7 +24,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/date"
                 android:textSize="13dp" />
-
+
             <EditText
                 android:id="@+id/viewopendate"
                 android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ordr_no"
                 android:textSize="13dp" />
-
+
             <EditText
                 android:id="@+id/viewjobcardNo"
                 android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/customer"
                 android:textSize="13dp" />
-
+
             <EditText
                 android:id="@+id/viewcustomertxt"
                 android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/equipment"
                 android:textSize="13dp" />
-
+
             <EditText
                 android:id="@+id/viewequpmetnTypetxt"
                 android:layout_width="match_parent"
@@ -117,7 +117,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/reasonforvisit"
                 android:textSize="13dp" />
-
+
             <EditText
                 android:id="@+id/viewvisitReason"
                 android:layout_width="match_parent"
@@ -141,7 +141,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/servicedetails"
                 android:textSize="13dp" />
-
+
             <EditText
                 android:id="@+id/viewservicetxt"
                 android:layout_width="match_parent"
@@ -161,7 +161,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/Filament_counter"
                 android:textSize="13dp" />
-
+
             <EditText
                 android:id="@+id/viewfileamentCounterTxt"
                 android:layout_width="match_parent"
@@ -181,7 +181,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/HV_Counter"
                 android:textSize="13dp" />
-
+
             <EditText
                 android:id="@+id/viewhvCounterTxt"
                 android:layout_width="match_parent"
@@ -201,7 +201,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/Log_time"
                 android:textSize="13dp" />
-
+
             <EditText
                 android:id="@+id/viewlogTimeTxt"
                 android:layout_width="match_parent"
@@ -220,7 +220,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/DownTime" />
-
+
             <EditText
                 android:id="@+id/viewdowntimeTxt"
                 android:layout_width="match_parent"
@@ -238,7 +238,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:gravity="center" >
-
+
                 <Button
                     android:id="@+id/viewJobcardCloseBtn"
                     android:layout_width="match_parent"

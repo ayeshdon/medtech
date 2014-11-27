@@ -134,7 +134,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="@string/traveTime" />
-
+
             <EditText
                 android:id="@+id/travelTimeEng1"
                 android:layout_width="0dp"
@@ -155,7 +155,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/signatureeng" />
-
+
             <LinearLayout
                 android:id="@+id/egineerSignaturelayout1"
                 android:layout_width="match_parent"
@@ -200,7 +200,7 @@
                 android:layout_weight="1"
                 android:enabled="false"
                 android:text="@string/signature" />
-
+
             <Button
                 android:id="@+id/addnewengineerBtn"
                 android:layout_width="wrap_content"
@@ -208,7 +208,7 @@
                 android:layout_weight="1"
                 android:enabled="false"
                 android:text="@string/add_new_engineer" />
-
+
             <Button
                 android:id="@+id/savecloseEng"
                 android:layout_width="wrap_content"
