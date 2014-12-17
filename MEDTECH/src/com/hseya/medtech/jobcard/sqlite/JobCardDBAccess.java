@@ -163,7 +163,7 @@ public class JobCardDBAccess {
 						LASTUPDATEDATE   +   " TEXT   "+
 						");"
 
-				);
+						);
 
 				//----------------------------------------------
 
@@ -177,7 +177,7 @@ public class JobCardDBAccess {
 						LASTUPDATEDATE   +   " TEXT   "+
 						");"
 
-				);
+						);
 
 				//------------------------------------------------
 				db.execSQL("CREATE TABLE " +TABLE_NAME +"("+
@@ -204,7 +204,7 @@ public class JobCardDBAccess {
 						LASTUPDATEDATE +   " TEXT   " +
 						");"
 
-				);
+						);
 
 
 
@@ -224,7 +224,7 @@ public class JobCardDBAccess {
 						LASTUPDATEDATE   +   " TEXT   "+
 						");"
 
-				);
+						);
 
 
 
@@ -241,7 +241,7 @@ public class JobCardDBAccess {
 						LASTUPDATEDATE     +   " TEXT   "+
 						");"
 
-				);
+						);
 
 
 
@@ -255,7 +255,7 @@ public class JobCardDBAccess {
 						LASTUPDATEDATE     +   " TEXT   "+
 						");"
 
-				);
+						);
 
 				//-------------------------------------------
 
@@ -394,13 +394,11 @@ public class JobCardDBAccess {
 			Cursor cus=DB.query(TABLE_NAME, colums, STATUS +" = "+status, null, null, null, null);
 
 
-			int rowID=cus.getColumnIndex(ORDERNO);
-			int rowName=cus.getColumnIndex(CUSTOMER);
-			int rowDate=cus.getColumnIndex(LASTUPDATEDATE);
-			int rowkeyID=cus.getColumnIndex(KEY_ID);
-			int val=cus.getColumnIndex(VAL);
-			//int inspection=cus.getColumnIndex(INSPECTION);
-			//int visual=cus.getColumnIndex(VISUAL);
+			int rowID    = cus.getColumnIndex(ORDERNO);
+			int rowName  = cus.getColumnIndex(CUSTOMER);
+			int rowDate  = cus.getColumnIndex(LASTUPDATEDATE);
+			int rowkeyID = cus.getColumnIndex(KEY_ID);
+			int val      = cus.getColumnIndex(VAL);
 
 
 
@@ -423,7 +421,7 @@ public class JobCardDBAccess {
 				testBean.setDate(cus.getString(rowDate));
 				testBean.setKeyID(cus.getString(rowkeyID));
 				testBean.setVal(cus.getString(val));
-			
+
 				dataList.add(testBean);
 			}
 
@@ -1352,6 +1350,7 @@ public class JobCardDBAccess {
 	//----------------- get all details to upload to server ----------------------
 
 
+	@SuppressWarnings("finally")
 	public JobCardDataBean getAllDetails(String jobCardID){
 
 		JobCardDataBean bean=new JobCardDataBean();
@@ -1364,7 +1363,9 @@ public class JobCardDBAccess {
 					LASTUPDATEDATE,INSPECTION,VISUAL};
 
 
-
+			System.out.println(" ");
+			System.out.println(" jobCardID : "+jobCardID);
+			System.out.println(" ");
 
 
 
@@ -1476,19 +1477,29 @@ public class JobCardDBAccess {
 
 			ArrayList<EngineerDataBean>dataList=new ArrayList<EngineerDataBean>();
 
+			System.out.println(" ");
+			System.out.println("cusENG size :  "+cusENG.getCount());
+			System.out.println(" ");
+
 			for(cusENG.moveToFirst();!cusENG.isAfterLast();cusENG.moveToNext()){
+
 				EngineerDataBean testBean=new EngineerDataBean();
-				//result+=cus.getString(rowID)+" "+cus.getString(rowName)+" "+cus.getString(rowAge);
+
 				testBean.setEngID(cusENG.getString(engID ));
 				testBean.setID(cusENG.getString(ID));
-				//				testBean.setDate(cusENG.getString(engDate));
 				testBean.setJobStart(cusENG.getString(engJobStart));
 				testBean.setJobFinished(cusENG.getString(engFinished));
 				testBean.setWorkedHours(cusENG.getString(engTimeWork));
 				testBean.setSignPath(cusENG.getString(engsign));
 				testBean.setTravelTime(cusENG.getString(engTravelTime));
+
+
 				dataList.add(testBean);
 			}
+
+			System.out.println(" ");
+			System.out.println(" dataList.size : "+dataList.size());
+			System.out.println(" ");
 
 			bean.setEngBean(dataList);
 

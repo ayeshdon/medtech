@@ -17,6 +17,8 @@
     <string name="ordr_no">Order NO</string>
     <string name="job_card">Job Card</string>
     <string name="date">Date</string>
+    <string name="no_internet_save_local">"No internet connection. Data save to local database"</string>
+    <string name="save_local">"Data save to local database"</string>
     <string name="customer">Customer</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -75,6 +77,10 @@
      <string name="partid">Part ID</string>
      <string name="emailcontent">Email Details</string>
      <string name="saveprevious">Save Previous</string>
+     <string name="savelocally">Save Locally</string>
+     <string name="canceljobcard">Cancel</string>
+     <string name="uploadjobcard">Upload</string>
+     <string name="hintclick">Click</string>
      <string name="inspection">Inspection not Applicable</string>
      <string name="visual">Visual Electrical &amp; Mechanical Safety Inspection CarriedOut</string>
 

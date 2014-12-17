@@ -101,7 +101,6 @@ public class UnfinishedJobCardActivity extends Activity implements OnItemClickLi
 			}
 
 
-//			Toast.makeText(this,VarList.SELECTED_ID, Toast.LENGTH_LONG).show();
 
 
 
@@ -111,7 +110,6 @@ public class UnfinishedJobCardActivity extends Activity implements OnItemClickLi
 		}else if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD) ){
 
 
-			//			VarList.UNFINISHED_JOB_BEAN
 
 
 
@@ -185,9 +183,13 @@ public class UnfinishedJobCardActivity extends Activity implements OnItemClickLi
 
 			try {
 
-
+				System.out.println("pppppppppppppppppp");
 				UserFunctions userFunction = new UserFunctions();
 				json = userFunction.uploadJobCard(VarList.UPLOADBEAN);
+				
+				System.out.println(" ");
+				System.out.println(" json 1 : "+json.toString());
+				System.out.println(" ");
 
 
 				int success = json.getInt(TAG_SUCCESS);
@@ -195,11 +197,19 @@ public class UnfinishedJobCardActivity extends Activity implements OnItemClickLi
 
 				if (success==1) {
 					ArrayList<EngineerDataBean> beanList=VarList.UPLOADBEAN.getEngBean();
+					
+					System.out.println(" ");
+					System.out.println(" beanList.size() : "+beanList.size());
+					System.out.println(" ");
+					
 
 					for (int i = 0; i < beanList.size(); i++) {
 
-
 						json = userFunction.uploadEngineerDetail(beanList.get(i), ID,String.valueOf(i));
+						
+						System.out.println(" ");
+						System.out.println(" json 2 : "+json.toString());
+						System.out.println(" ");
 
 					}
 					
@@ -210,6 +220,10 @@ public class UnfinishedJobCardActivity extends Activity implements OnItemClickLi
 
 
 						json = userFunction.uploadPartDetail(partbean.get(i), ID);
+						
+						System.out.println(" ");
+						System.out.println(" json 3 : "+json.toString());
+						System.out.println(" ");
 					}
 					
 					//-----------------------------------------------
@@ -221,6 +235,12 @@ public class UnfinishedJobCardActivity extends Activity implements OnItemClickLi
 						Boolean flag=true;
 						try {
 							json = userFunction.createPDF( ID,VarList.UPLOADBEAN.getEngineerUser());
+							
+							
+							System.out.println(" ");
+							System.out.println(" json 4 : "+json.toString());
+							System.out.println(" ");
+							
 						} catch (Exception e) {
 							
 							

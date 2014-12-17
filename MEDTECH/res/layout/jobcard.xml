@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/jobcardlayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/sig_color"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <include
@@ -18,7 +17,7 @@
         android:gravity="center"
         android:text="@string/job_card"
         android:textColor="@color/txt_color"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <ScrollView
@@ -38,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="@string/date"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/opendate"
@@ -48,7 +47,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
-                android:editable="false"
+                android:enabled="false"
+                android:inputType="datetime"
                 android:ellipsize="start"
                 android:ems="10"
                 android:gravity="center" />
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ordr_no"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/jobcardNo"
@@ -70,6 +70,7 @@
                 android:layout_marginTop="5dp"
                 android:ellipsize="start"
                 android:ems="10"
+                android:inputType="none"
                 android:gravity="center"
                 android:maxLength="8" />
 
@@ -87,7 +88,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/customer"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/customertxt"
@@ -97,7 +98,7 @@
                 android:layout_marginRight="20dp"
                 android:editable="false"
                 android:focusableInTouchMode="false"
-                android:hint="Click" >
+                android:hint="@string/hintclick" >
             </EditText>
 
             <TextView
@@ -109,7 +110,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/equipment"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/equpmetnTypetxt"
@@ -119,7 +120,7 @@
                 android:layout_marginRight="20dp"
                 android:editable="false"
                 android:focusableInTouchMode="false"
-                android:hint="Click"
+                android:hint="@string/hintclick"
                 android:maxLength="30" />
 
             <TextView
@@ -131,7 +132,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/reasonforvisit"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/visitReason"
@@ -140,6 +141,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
+                android:inputType="text"
                 android:maxLength="50" >
 
                 <requestFocus />
@@ -154,7 +156,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/servicedetails"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/servicetxt"
@@ -163,6 +165,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
+                android:inputType="text"
                 android:maxLength="500" />
 
             <TextView
@@ -172,7 +175,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/part_used"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/partusedtxt"
@@ -185,7 +188,7 @@
                 android:editable="false"
                 android:ems="10"
                 android:focusableInTouchMode="false"
-                android:hint="Click"
+                android:hint="@string/hintclick"
                 android:maxLength="50" />
 
             <TextView
@@ -195,7 +198,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/Filament_counter"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/fileamentCounterTxt"
@@ -203,6 +206,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:inputType="none"
                 android:layout_marginTop="5dp"
                 android:ems="10"
                 android:maxLength="8" />
@@ -214,7 +218,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/HV_Counter"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/hvCounterTxt"
@@ -224,6 +228,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
                 android:ems="10"
+                android:inputType="none"
                 android:maxLength="8" />
 
             <TextView
@@ -233,7 +238,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/Log_time"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/logTimeTxt"
@@ -245,7 +250,7 @@
                 android:editable="false"
                 android:ems="10"
                 android:focusableInTouchMode="false"
-                android:hint="Click" />
+                android:hint="@string/hintclick" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -274,20 +279,23 @@
 
                 <Button
                     android:id="@+id/engineerdetailsBtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/engineer_details" />
 
                 <Button
                     android:id="@+id/closesaveBtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/closeAndSave" />
 
                 <Button
                     android:id="@+id/closebtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/closewithoutsave" />
             </LinearLayout>
 

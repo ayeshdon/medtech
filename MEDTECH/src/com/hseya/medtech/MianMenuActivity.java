@@ -108,6 +108,8 @@ public class MianMenuActivity extends Activity implements OnClickListener {
 			Intent call2=new Intent(MianMenuActivity.this,UnfinishedJobCardActivity.class);
 			startActivity(call2);
 			MianMenuActivity.this.finish();
+		
+			
 			break;
 
 		case R.id.exitBtn:

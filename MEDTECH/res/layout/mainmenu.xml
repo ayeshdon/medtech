@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sig_color"
+    android:background="#FFFFFF"
     android:orientation="vertical" >
 
     <include
@@ -69,67 +69,60 @@
         <Button
             android:id="@+id/createjobcardBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/buttonbg"
             android:text="@string/job_card_btn_txt" />
 
         <Button
             android:id="@+id/syncdbBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/buttonbg"
             android:text="@string/sync_db" />
 
         <Button
             android:id="@+id/uploadjobBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/buttonbg"
             android:text="@string/upload_jobcard" />
 
         <Button
             android:id="@+id/unfinishedJobcard"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/buttonbg"
             android:text="@string/unfinished_jobcard" />
 
         <Button
             android:id="@+id/signOutBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/buttonbg"
             android:text="@string/logout" />
 
         <Button
             android:id="@+id/exitBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/buttonbg"
             android:text="@string/exit" />
     </LinearLayout>
 
