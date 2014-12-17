@@ -630,7 +630,7 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 				boolean isItwork=true;
 				//closeSaveBtn.setEnabled(false);
 
-				JobCardDataBean jobBeanSave =VarList.JOB_BEAN;
+				JobCardDataBean jobBeanSave = VarList.JOB_BEAN;
 
 
 
@@ -648,6 +648,7 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 						dbSQl.insertENG(jobBeanSave);
 
 						dbSQl.closeDB();
+					
 					} catch (Exception e) {
 						isItwork=false;
 						e.printStackTrace();

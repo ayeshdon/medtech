@@ -142,7 +142,6 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="date" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -155,13 +154,12 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/signatureeng" />
-
+
             <LinearLayout
                 android:id="@+id/egineerSignaturelayout1"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="5dp" >
-
             </LinearLayout>
         </LinearLayout>
 

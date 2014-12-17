@@ -208,6 +208,8 @@ public class CaptureSignature extends Activity implements OnClickListener {
 						// dbSQl.insertENG(jobBeanSave);
 						dbSQl.updateENG(jobBeanSave,
 								Long.parseLong(VarList.SELECTED_ID));
+						
+						
 						dbSQl.closeDB();
 
 					} catch (Exception e) {

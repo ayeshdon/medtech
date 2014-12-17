@@ -719,30 +719,34 @@ public class JobCardDBAccess {
 
 
 
-			long i =DB.insert(TABLE_NAME, null, cv);
+			long i = DB.insert(TABLE_NAME, null, cv);
 
-			jobcardID=String.valueOf(i);
+			jobcardID = String.valueOf(i);
 
 			//----------------- insert part------------------------
 
 			ArrayList<PartsBean> partBean=bean.getPartBean();
 
 
+			if (partBean != null) {
 
-			for (int j = 0; j < partBean.size(); j++) { 
 
-				PartsBean data=partBean.get(j);
+				for (int j = 0; j < partBean.size(); j++) { 
 
-				ContentValues cv2=new ContentValues();
+					PartsBean data=partBean.get(j);
 
-				cv2.put(PART_NAME, data.getPartName());
-				cv2.put(JOBCARDID, jobcardID);
-				cv2.put(QUANTITY, data.getPartQuantitys());
-				cv2.put(PARTID, data.getPartID());
-				cv2.put(CREATEDATE, new Date().toString()); 
-				cv2.put(LASTUPDATEDATE, new Date().toString()); 
+					ContentValues cv2=new ContentValues();
 
-				DB.insert(PART_TB, null, cv2);
+					cv2.put(PART_NAME, data.getPartName());
+					cv2.put(JOBCARDID, jobcardID);
+					cv2.put(QUANTITY, data.getPartQuantitys());
+					cv2.put(PARTID, data.getPartID());
+					cv2.put(CREATEDATE, new Date().toString()); 
+					cv2.put(LASTUPDATEDATE, new Date().toString()); 
+
+					DB.insert(PART_TB, null, cv2);
+				}
+
 			}
 
 
@@ -771,7 +775,13 @@ public class JobCardDBAccess {
 				cv1.put(CREATEDATE, new Date().toString()); 
 				cv1.put(LASTUPDATEDATE, new Date().toString()); 
 
-				DB.insert(ENGINEER_HIS, null, cv1);
+				long k = DB.insert(ENGINEER_HIS, null, cv1);
+
+				System.out.println(" ");
+				System.out.println(" insert key : "+k);
+				System.out.println(" insert jobcardID : "+jobcardID);
+				System.out.println(" ");
+
 			}
 
 			//Log.d("--------------------------", jobcardID); 
@@ -964,6 +974,8 @@ public class JobCardDBAccess {
 				cv1.put(TRAVELTIME, data.getTravelTime());
 
 				cv1.put(CREATEDATE, new Date().toString()); 
+				//cv1.put(ENGSIGN, data.getSignPath()); 
+				
 				cv1.put(LASTUPDATEDATE, new Date().toString()); 
 
 				if (data.getFlag().equals("0")) {
@@ -1017,11 +1029,20 @@ public class JobCardDBAccess {
 
 		long i =DB.update(TABLE_NAME, cv, KEY_ID + " = "+val	, null);
 
-		jobcardID=String.valueOf(i);
+		jobcardID = String.valueOf(i);
+
+		System.out.println(" ");
+		System.out.println(" val : "+val);
+		System.out.println(" jobcardID : "+jobcardID);
+		System.out.println(" ");
 
 		//-------------------------------------------------
 
 		ArrayList<EngineerDataBean> dataBeanList=bean.getEngBean();
+
+		System.out.println(" ");
+		System.out.println(" dataBeanList.size() update : "+dataBeanList.size());
+		System.out.println(" ");
 
 
 
@@ -1032,7 +1053,8 @@ public class JobCardDBAccess {
 			ContentValues cv1=new ContentValues();
 
 
-			cv1.put(JOBCARDID, jobcardID);
+			cv1.put(JOBCARDID, val);
+			//			cv1.put(JOBCARDID, jobcardID);
 			cv1.put(ENGINEERID, data.getEngID());
 			cv1.put(DATE, ""); 
 			cv1.put(JOBSTART,data.getJobStart());
@@ -1041,8 +1063,30 @@ public class JobCardDBAccess {
 			cv1.put(TRAVELTIME, data.getTravelTime());
 			cv1.put(CREATEDATE, new Date().toString()); 
 			cv1.put(LASTUPDATEDATE, new Date().toString()); 
+			cv1.put(ENGSIGN, data.getSignPath()); 
 
-			DB.update(ENGINEER_HIS, cv1, KEY_ID+ " = "+data.getID(), null);
+			//			DB.update(ENGINEER_HIS, cv1, KEY_ID+ " = "+data.getID(), null);
+
+
+
+			if (data.getFlag().equals("0")) {
+				DB.update(ENGINEER_HIS, cv1, KEY_ID+ " = "+data.getID(), null);
+			}else{
+				DB.insert(ENGINEER_HIS, null, cv1);
+
+			}
+
+			//			if (data.getID()!=null ) {
+			//				DB.update(PART_TB, cv2,  KEY_ID + " = "+data.getID(), null);
+			//			}else{
+			//				DB.insert(PART_TB, null, cv2);
+			//			}
+
+
+			System.out.println(" ");
+			System.out.println(" update jobcardID : "+jobcardID);
+			System.out.println(" update KEY_ID : "+data.getID());
+			System.out.println(" ");
 		}
 
 	}
@@ -1492,6 +1536,10 @@ public class JobCardDBAccess {
 				testBean.setWorkedHours(cusENG.getString(engTimeWork));
 				testBean.setSignPath(cusENG.getString(engsign));
 				testBean.setTravelTime(cusENG.getString(engTravelTime));
+				
+				System.out.println(" ");
+				System.out.println(" cusENG.getString(engsign) : "+cusENG.getString(engsign));
+				System.out.println(" ");
 
 
 				dataList.add(testBean);

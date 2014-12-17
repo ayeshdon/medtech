@@ -120,7 +120,7 @@ public class UserFunctions {
 		try {
 
 
-			//			System.out.println("sign path : "+ bean.getSignPath()); 
+			System.out.println("sign path : "+ bean.getSignPath()); 
 			Bitmap bitmapCus = BitmapFactory.decodeFile(bean.getSignPath()); 
 			ByteArrayOutputStream streamCus = new ByteArrayOutputStream();
 			bitmapCus.compress(Bitmap.CompressFormat.PNG, 90, streamCus); //compress to which format you want.
