@@ -32,7 +32,7 @@ public class MianMenuActivity extends Activity implements OnClickListener {
 
 
 
-	private Button createJobCardBtn,exitBtn,syncDBBtn,upladJobsBtn,unfinisedCard;
+	private Button createJobCardBtn,exitBtn,syncDBBtn,upladJobsBtn,unfinisedCard,signOutBtn;
 
 
 	@Override
@@ -49,6 +49,9 @@ public class MianMenuActivity extends Activity implements OnClickListener {
 
 		createJobCardBtn=(Button) findViewById(R.id.createjobcardBtn);
 		createJobCardBtn.setOnClickListener(this);
+		
+		signOutBtn =(Button) findViewById(R.id.signOutBtn);
+		signOutBtn.setOnClickListener(this);
 
 		exitBtn=(Button) findViewById(R.id.exitBtn);
 		exitBtn.setOnClickListener(this);
@@ -74,7 +77,10 @@ public class MianMenuActivity extends Activity implements OnClickListener {
 
 		switch (v.getId()) {
 		case R.id.createjobcardBtn:
-			VarList.SELETCED_BTN=ConstList.CREATE_JOBCARD;
+			
+			
+			VarList.SELETCED_BTN  = ConstList.CREATE_JOBCARD;
+			
 			Intent call=new Intent(MianMenuActivity.this,JobCardActivity.class);
 			startActivity(call);
 			MianMenuActivity.this.finish();
@@ -118,6 +124,12 @@ public class MianMenuActivity extends Activity implements OnClickListener {
 			MianMenuActivity.this.finish();
 
 
+			break;
+			
+		case R.id.signOutBtn :
+			
+			logoutAction();
+			
 			break;
 
 		default:
@@ -194,43 +206,7 @@ public class MianMenuActivity extends Activity implements OnClickListener {
 		 */
 		if (item.getItemId()==R.id.logoutmenu) { 
 
-			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-					this);
-
-			// set title
-			alertDialogBuilder.setTitle("Logout");
-
-			// set dialog message
-			alertDialogBuilder
-			.setMessage("Are you sure you want to logout?")
-			.setCancelable(false)
-			.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int id) {
-
-					SharedPreferences loginSetting=getSharedPreferences(ConstList.SHARED_FILE, 0);
-					SharedPreferences.Editor editor=loginSetting.edit();
-					editor.putBoolean(ConstList.LOGIN_FLAG, false); 
-					editor.commit();
-
-					Intent call=new Intent(MianMenuActivity.this,LoginActivity.class);
-					startActivity(call);
-					MianMenuActivity.this.finish();
-
-
-				}
-			})
-			.setNegativeButton("No",new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int id) {
-
-					dialog.cancel();
-				}
-			});
-
-			// create alert dialog
-			AlertDialog alertDialog = alertDialogBuilder.create();
-
-			// show it
-			alertDialog.show();
+			logoutAction();
 
 
 		}
@@ -238,6 +214,53 @@ public class MianMenuActivity extends Activity implements OnClickListener {
 
 		return super.onOptionsItemSelected(item);
 	}
+
+	private void logoutAction() {
+
+
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+
+		// set title
+		alertDialogBuilder.setTitle("Logout");
+
+		// set dialog message
+		alertDialogBuilder
+		.setMessage("Are you sure you want to logout?")
+		.setCancelable(false)
+		.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+
+				SharedPreferences loginSetting=getSharedPreferences(ConstList.SHARED_FILE, 0);
+				SharedPreferences.Editor editor=loginSetting.edit();
+				editor.putBoolean(ConstList.LOGIN_FLAG, false); 
+				editor.commit();
+
+				Intent call=new Intent(MianMenuActivity.this,LoginActivity.class);
+				startActivity(call);
+				MianMenuActivity.this.finish();
+
+
+			}
+		})
+		.setNegativeButton("No",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+
+				dialog.cancel();
+			}
+		});
+
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
+		
+	}
+
+
+
+
 
 	/*
 	 * load constant data from data base
