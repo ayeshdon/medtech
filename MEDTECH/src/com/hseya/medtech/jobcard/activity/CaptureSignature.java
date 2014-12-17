@@ -24,7 +24,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -113,29 +112,19 @@ public class CaptureSignature extends Activity implements OnClickListener {
 
 		uniqueId = getTodaysDate() + "_" + getCurrentTime() + "_"
 				+ Math.random() + "_" + VarList.USER_NAME + "CUS";
-		// engUniqueId =getTodaysDate() + "_" + getCurrentTime() + "_" +
-		// Math.random()+"_"+VarList.USER_NAME+"ENG";
 
 		current = uniqueId + ".png";
-		// engCurrent = engUniqueId + ".png";
 
 		mypath = new File(directory, current);
-		// engmypath = new File(directory,engCurrent);
 
 		mContent = (LinearLayout) findViewById(R.id.customerSignature);
-		// engContent = (LinearLayout)
-		// findViewById(R.id.egineerSignaturelayout);
 
 		mSignature = new signature(this, null, "C");
-		// engSignature = new signature(this, null,"E");
 
 		mSignature.setBackgroundColor(Color.WHITE);
-		// engSignature.setBackgroundColor(Color.WHITE);
 
 		mContent.addView(mSignature, LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT);
-		// engContent.addView(engSignature, LayoutParams.FILL_PARENT,
-		// LayoutParams.FILL_PARENT);
 
 		mClear = (Button) findViewById(R.id.clear);
 		mGetSign = (Button) findViewById(R.id.getsign);
@@ -208,8 +197,7 @@ public class CaptureSignature extends Activity implements OnClickListener {
 						// dbSQl.insertENG(jobBeanSave);
 						dbSQl.updateENG(jobBeanSave,
 								Long.parseLong(VarList.SELECTED_ID));
-						
-						
+
 						dbSQl.closeDB();
 
 					} catch (Exception e) {
@@ -319,7 +307,6 @@ public class CaptureSignature extends Activity implements OnClickListener {
 
 					}
 
-					// Log.d("Test", "asdas");
 				} catch (Exception e) {
 
 					e.printStackTrace();
@@ -427,7 +414,6 @@ public class CaptureSignature extends Activity implements OnClickListener {
 					databean.setCustomerSignPath(mypath.getPath());
 
 				} catch (Exception e) {
-					Log.v("log_tag", "-----------------------------------rrrr");
 					e.printStackTrace();
 				}
 
@@ -607,11 +593,9 @@ public class CaptureSignature extends Activity implements OnClickListener {
 
 	// ----------------------------------------------------------
 
-	// public static final int progress_bar_type = 1;
 
 	private JSONObject json;
 
-	// private ProgressDialog pDialog;
 
 	private class PostToServerEng extends AsyncTask<String, String, String> {
 		private String retrunMsg = "";
@@ -704,7 +688,6 @@ public class CaptureSignature extends Activity implements OnClickListener {
 					retrunMsg = json.getString("msg");
 				}
 
-				Log.d("MAIN", json.toString());
 				return retrunMsg;
 
 			} catch (Exception e) {

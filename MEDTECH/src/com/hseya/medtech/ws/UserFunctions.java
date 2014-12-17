@@ -33,10 +33,7 @@ public class UserFunctions {
 	private static final String JOBCARD_PDF         = "pdf";
 	private static final String UPLOAD              = "upload";
 
-	//	private static String register_tag = "register";
-	//	private static String addads_tag = "addadsa";
 
-	// constructor
 	public UserFunctions(){
 		jsonParser = new JSONParser();
 	}
@@ -120,7 +117,6 @@ public class UserFunctions {
 		try {
 
 
-			System.out.println("sign path : "+ bean.getSignPath()); 
 			Bitmap bitmapCus = BitmapFactory.decodeFile(bean.getSignPath()); 
 			ByteArrayOutputStream streamCus = new ByteArrayOutputStream();
 			bitmapCus.compress(Bitmap.CompressFormat.PNG, 90, streamCus); //compress to which format you want.
@@ -224,8 +220,6 @@ public class UserFunctions {
 
 			//			System.out.println(" Engineer ID : "+  bean.getEngineerUser());
 
-			System.out.println("upload user id : "+bean.getEngineerUser()); 
-			System.out.println("upload user name : "+VarList.USER_NAME); 
 
 			params.add(new BasicNameValuePair(ConstList.JOBCARD_ENGINEER,        bean.getEngineerUser()));
 //			params.add(new BasicNameValuePair(ConstList.JOBCARD_ENGINEER,        ""));

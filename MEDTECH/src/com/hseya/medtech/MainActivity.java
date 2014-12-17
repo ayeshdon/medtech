@@ -35,12 +35,10 @@ public class MainActivity extends Activity {
 				finally {
 					finish();
 
-					//start a new activity
 					Intent i = new Intent();
 					i.setClass(thisActivity, LoginActivity.class);
 					startActivity(i);
 					thisActivity.finish();
-//					stop();
 				}
 			}
 		};

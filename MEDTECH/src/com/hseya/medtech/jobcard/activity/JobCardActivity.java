@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -28,7 +28,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.hseya.medtech.MianMenuActivity;
 import com.hseya.medtech.R;
 import com.hseya.medtech.jobcard.bean.JobCardDataBean;
@@ -39,185 +38,170 @@ import com.hseya.medtech.utill.ConstList;
 import com.hseya.medtech.utill.MessageClass;
 import com.hseya.medtech.utill.VarList;
 
-public class JobCardActivity extends Activity implements OnTouchListener, OnClickListener
-{
-
+@SuppressLint("SimpleDateFormat")
+public class JobCardActivity extends Activity implements OnTouchListener,
+		OnClickListener {
 
 	private View layout;
-	private EditText opentDateTxt,inputSearch,serviceTxt,eqicType,jobCardNoTXT;
-	private Dialog dialog,eqDailog,partDailog;
+	private EditText opentDateTxt, inputSearch, serviceTxt, eqicType,
+			jobCardNoTXT;
+	private Dialog dialog, eqDailog, partDailog;
 	private ListView lv;
-	private Button nextBTN,closeBTN,closeSaveBTN;
-	private EditText partNameTxt,partQuantityTxt,partIDTxt;
+	private Button nextBTN, closeBTN, closeSaveBTN;
+	private EditText partNameTxt, partQuantityTxt, partIDTxt;
 
-	private EditText customerTXT,visitReasonTXT,partusedTXT,fileamentCounterTXT,hvCounterTXT,logTimeTXT,downtimeTXT;
+	private EditText customerTXT, visitReasonTXT, partusedTXT,
+			fileamentCounterTXT, hvCounterTXT, logTimeTXT, downtimeTXT;
 	ArrayAdapter<String> adapter;
 
-	String jobCardNo,customer,equcment,visitReason,service,partUsed,filamnetCounter,hvCounter,logTime,downTime;
-	private String dateNow ,customerID,eqicmentID;
+	String jobCardNo, customer, equcment, visitReason, service, partUsed,
+			filamnetCounter, hvCounter, logTime, downTime;
+	private String dateNow, customerID, eqicmentID;
 
 	private JobCardDataBean displayBean;
 
-	//-----------------------------------
+	// -----------------------------------
 
 	private ArrayList<PartsBean> partBean;
 
-	//-------------------------------------
+	// -------------------------------------
 	CustomDateTimePicker custom;
-	private int SIZE=0;
+	private int SIZE = 0;
 
-	private int index=1;
-
-
+	private int index = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
-
-		VarList.JOB_BEAN=null;
+		VarList.JOB_BEAN = null;
 
 		Calendar currentDate = Calendar.getInstance();
 
-		SimpleDateFormat formatter=new SimpleDateFormat("dd/MMM/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
 
 		dateNow = formatter.format(currentDate.getTime());
 
-
-
-
 		super.onCreate(savedInstanceState);
-
 
 		this.getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-
 		setContentView(R.layout.jobcard);
 
-
-		//--------------------------
-
+		// --------------------------
 
 		custom = new CustomDateTimePicker(this,
 				new CustomDateTimePicker.ICustomDateTimeListener() {
 
-			@Override
-			public void onSet(Dialog dialog, Calendar calendarSelected,
-					Date dateSelected, int year, String monthFullName,
-					String monthShortName, int monthNumber, int date,
-					String weekDayFullName, String weekDayShortName,
-					int hour24, int hour12, int min, int sec,
-					String AM_PM) {
+					@Override
+					public void onSet(Dialog dialog, Calendar calendarSelected,
+							Date dateSelected, int year, String monthFullName,
+							String monthShortName, int monthNumber, int date,
+							String weekDayFullName, String weekDayShortName,
+							int hour24, int hour12, int min, int sec,
+							String AM_PM) {
 
-				logTimeTXT.setText( calendarSelected
-						.get(Calendar.DAY_OF_MONTH)
-						+ ":" + monthShortName + ":" + year
-						+ ":" + hour24 + ":" + min
-						+ " " + AM_PM);
-			}
+						logTimeTXT.setText(calendarSelected
+								.get(Calendar.DAY_OF_MONTH)
+								+ ":"
+								+ monthShortName
+								+ ":"
+								+ year
+								+ ":"
+								+ hour24
+								+ ":" + min + " " + AM_PM);
+					}
 
-			@Override
-			public void onCancel() {
+					@Override
+					public void onCancel() {
 
-			}
-		});
+					}
+				});
 
-
-
-		//---------------------
+		// ---------------------
 		layout = findViewById(R.id.jobcardlayout);
 		layout.setOnTouchListener(this);
 
-
-		opentDateTxt=(EditText) findViewById(R.id.opendate);
+		opentDateTxt = (EditText) findViewById(R.id.opendate);
 		opentDateTxt.setText(dateNow);
 
-		customerTXT=(EditText) findViewById(R.id.customertxt);
+		customerTXT = (EditText) findViewById(R.id.customertxt);
 		customerTXT.setOnClickListener(this);
 		customerTXT.clearFocus();
 
-
-		eqicType=(EditText) findViewById(R.id.equpmetnTypetxt);
+		eqicType = (EditText) findViewById(R.id.equpmetnTypetxt);
 		eqicType.setOnClickListener(this);
 		eqicType.clearFocus();
 
-		partusedTXT=(EditText) findViewById(R.id.partusedtxt);
+		partusedTXT = (EditText) findViewById(R.id.partusedtxt);
 		partusedTXT.setOnClickListener(this);
 		partusedTXT.clearFocus();
 
+		jobCardNoTXT = (EditText) findViewById(R.id.jobcardNo);
+		// customerTXT=(EditText) findViewById(R.id.customertxt);
+		// eqicType=(EditText) findViewById(R.id.equpmetnTypetxt);
+		visitReasonTXT = (EditText) findViewById(R.id.visitReason);
+		serviceTxt = (EditText) findViewById(R.id.servicetxt);
 
-		
-		jobCardNoTXT=(EditText) findViewById(R.id.jobcardNo);
-		//customerTXT=(EditText) findViewById(R.id.customertxt);
-		//eqicType=(EditText) findViewById(R.id.equpmetnTypetxt);
-		visitReasonTXT=(EditText) findViewById(R.id.visitReason);
-		serviceTxt=(EditText) findViewById(R.id.servicetxt);
+		fileamentCounterTXT = (EditText) findViewById(R.id.fileamentCounterTxt);
 
-		fileamentCounterTXT=(EditText) findViewById(R.id.fileamentCounterTxt);
+		hvCounterTXT = (EditText) findViewById(R.id.hvCounterTxt);
 
-		hvCounterTXT=(EditText) findViewById(R.id.hvCounterTxt);
-
-		logTimeTXT=(EditText) findViewById(R.id.logTimeTxt);
+		logTimeTXT = (EditText) findViewById(R.id.logTimeTxt);
 		logTimeTXT.setOnClickListener(this);
 		logTimeTXT.clearFocus();
-		//	logTimeTXT.setInputType(InputType.TYPE_NULL);
+		// logTimeTXT.setInputType(InputType.TYPE_NULL);
 
-		downtimeTXT=(EditText) findViewById(R.id.downtimeTxt);
+		downtimeTXT = (EditText) findViewById(R.id.downtimeTxt);
 
-
-		nextBTN=(Button) findViewById(R.id.engineerdetailsBtn); 
+		nextBTN = (Button) findViewById(R.id.engineerdetailsBtn);
 		nextBTN.setOnClickListener(this);
 
-		closeBTN=(Button) findViewById(R.id.closebtn); 
+		closeBTN = (Button) findViewById(R.id.closebtn);
 		closeBTN.setOnClickListener(this);
 
-		closeSaveBTN=(Button) findViewById(R.id.closesaveBtn); 
+		closeSaveBTN = (Button) findViewById(R.id.closesaveBtn);
 		closeSaveBTN.setOnClickListener(this);
 
-
-		if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD) ){
-			//closeSaveBTN.setEnabled(false);
-			/*set value to edit text field */
+		if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
+			// closeSaveBTN.setEnabled(false);
+			/* set value to edit text field */
 			closeSaveBTN.setText(MessageClass.SAVE_MSG);
 
-			JobCardDBAccess dbClass=new JobCardDBAccess(this);
+			JobCardDBAccess dbClass = new JobCardDBAccess(this);
 
 			dbClass.openDB();
 
-			if (VarList.SELECTED_ID_VAL.equals("2")) { 
-				displayBean=dbClass.getJobcardDetials(Long.parseLong(VarList.SELECTED_ID),true);
-			}else {
-				displayBean=dbClass.getJobcardDetials(Long.parseLong(VarList.SELECTED_ID),false);
+			if (VarList.SELECTED_ID_VAL.equals("2")) {
+				displayBean = dbClass.getJobcardDetials(
+						Long.parseLong(VarList.SELECTED_ID), true);
+			} else {
+				displayBean = dbClass.getJobcardDetials(
+						Long.parseLong(VarList.SELECTED_ID), false);
 			}
-			//------------------------------------------------
-			VarList.PART_BEAN=displayBean.getPartBean();
-			//--------------------------------------------------------------------
+			// ------------------------------------------------
+			VarList.PART_BEAN = displayBean.getPartBean();
+			// --------------------------------------------------------------------
 			dbClass.closeDB();
-
-
 
 			opentDateTxt.setText(displayBean.getJobDate());
 			customerTXT.setText(displayBean.getCustomer());
 			eqicType.setText(displayBean.getEqucment());
 			jobCardNoTXT.setText(displayBean.getJobCardNO());
-			visitReasonTXT.setText(displayBean.getVisitReason() );
+			visitReasonTXT.setText(displayBean.getVisitReason());
 			serviceTxt.setText(displayBean.getService());
 			partusedTXT.setText(displayBean.getPartUsed());
 			fileamentCounterTXT.setText(displayBean.getFilamnetCounter());
-			hvCounterTXT.setText(displayBean.getHvCounter() );
+			hvCounterTXT.setText(displayBean.getHvCounter());
 			logTimeTXT.setText(displayBean.getLogTime());
 			downtimeTXT.setText(displayBean.getDownTime());
 
-
-		}else if (VarList.SELETCED_BTN.equals(ConstList.CREATE_JOBCARD)) { 
+		} else if (VarList.SELETCED_BTN.equals(ConstList.CREATE_JOBCARD)) {
 
 			closeSaveBTN.setEnabled(true);
 
 		}
-
-
-
 
 	}
 
@@ -229,8 +213,8 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 
 	@Override
 	public boolean onTouch(View v, MotionEvent arg1) {
-		if(v==layout){
-			InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		if (v == layout) {
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(layout.getWindowToken(), 0);
 			return true;
 		}
@@ -246,18 +230,11 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 
 			try {
 
-
-
-
-
-
 				dialog = new Dialog(this);
 
 				dialog.setContentView(R.layout.fetch_customer);
 
 				dialog.setCancelable(true);
-
-
 
 				dialog.setTitle("Select Customer");
 
@@ -265,46 +242,44 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 
 				inputSearch = (EditText) dialog.findViewById(R.id.inputSearch);
 
-				ArrayList<String>cus_name=new ArrayList<String>();
-
+				ArrayList<String> cus_name = new ArrayList<String>();
 
 				for (int i = 0; i < VarList.CUSTOMER_LIST.size(); i++) {
 					cus_name.add(VarList.CUSTOMER_LIST.get(i).getCus_name());
 
 				}
 
-				adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cus_name);
+				adapter = new ArrayAdapter<String>(this,
+						android.R.layout.simple_list_item_1, cus_name);
 				lv.setAdapter(adapter);
-
 
 				lv.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
 					public void onItemClick(AdapterView<?> parent, View arg1,
 							int position, long arg3) {
-						customerTXT.setText(parent.getItemAtPosition(position).toString() );
+						customerTXT.setText(parent.getItemAtPosition(position)
+								.toString());
 
-						customerID=VarList.CUSTOMER_LIST.get(position).getCus_ID(); 
+						customerID = VarList.CUSTOMER_LIST.get(position)
+								.getCus_ID();
 
 						dialog.dismiss();
 					}
 
-
-
-
 				});
-
 
 				inputSearch.addTextChangedListener(new TextWatcher() {
 
 					@Override
-					public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-						JobCardActivity.this.adapter.getFilter().filter(cs);	
+					public void onTextChanged(CharSequence cs, int arg1,
+							int arg2, int arg3) {
+						JobCardActivity.this.adapter.getFilter().filter(cs);
 					}
 
 					@Override
-					public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-							int arg3) {
+					public void beforeTextChanged(CharSequence arg0, int arg1,
+							int arg2, int arg3) {
 
 					}
 
@@ -313,14 +288,8 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 					}
 				});
 
-
-
-
-
-
-
-
-				Button cancelBtn=(Button)dialog.findViewById(R.id.customercancelbtn);
+				Button cancelBtn = (Button) dialog
+						.findViewById(R.id.customercancelbtn);
 
 				cancelBtn.setOnClickListener(new OnClickListener() {
 
@@ -331,20 +300,14 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 					}
 				});
 
-
 				dialog.show();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			break;
 
-
-
-
 		case R.id.equpmetnTypetxt:
 			try {
-
-
 
 				eqDailog = new Dialog(this);
 
@@ -352,77 +315,64 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 
 				eqDailog.setCancelable(true);
 
-
-
 				eqDailog.setTitle("Select Equipment");
 
 				lv = (ListView) eqDailog.findViewById(R.id.list_viewEQ);
 
-				inputSearch = (EditText) eqDailog.findViewById(R.id.inputSearchEQ);
+				inputSearch = (EditText) eqDailog
+						.findViewById(R.id.inputSearchEQ);
 
-
-
-				ArrayList<String>EQ_name=new ArrayList<String>();
-
+				ArrayList<String> EQ_name = new ArrayList<String>();
 
 				for (int i = 0; i < VarList.EQCIPMENTS_LIST.size(); i++) {
 					EQ_name.add(VarList.EQCIPMENTS_LIST.get(i).getName());
 
 				}
 
-
-				adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, EQ_name);
+				adapter = new ArrayAdapter<String>(this,
+						android.R.layout.simple_list_item_1, EQ_name);
 				lv.setAdapter(adapter);
-
 
 				lv.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
 					public void onItemClick(AdapterView<?> parent, View arg1,
 							int position, long arg3) {
-						//Toast.makeText(JobCardActivity.this,"rrrrrr - "+parent.getItemAtPosition(position).toString() ,Toast.LENGTH_LONG).show();
-						eqicType.setText(parent.getItemAtPosition(position).toString() );
-						eqicmentID=VarList.EQCIPMENTS_LIST.get(position).getID();
+						// Toast.makeText(JobCardActivity.this,"rrrrrr - "+parent.getItemAtPosition(position).toString()
+						// ,Toast.LENGTH_LONG).show();
+						eqicType.setText(parent.getItemAtPosition(position)
+								.toString());
+						eqicmentID = VarList.EQCIPMENTS_LIST.get(position)
+								.getID();
 						eqDailog.dismiss();
 					}
 
-
-
-
 				});
-
 
 				inputSearch.addTextChangedListener(new TextWatcher() {
 
 					@Override
-					public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+					public void onTextChanged(CharSequence cs, int arg1,
+							int arg2, int arg3) {
 						// When user changed the Text
-						JobCardActivity.this.adapter.getFilter().filter(cs);	
+						JobCardActivity.this.adapter.getFilter().filter(cs);
 					}
 
 					@Override
-					public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-							int arg3) {
+					public void beforeTextChanged(CharSequence arg0, int arg1,
+							int arg2, int arg3) {
 						// TODO Auto-generated method stub
 
 					}
 
 					@Override
 					public void afterTextChanged(Editable arg0) {
-						// TODO Auto-generated method stub							
+						// TODO Auto-generated method stub
 					}
 				});
 
-
-
-
-
-
-
-
-				Button cancelBtnEQ=(Button)eqDailog.findViewById(R.id.eqcancelbtn);
-
-
+				Button cancelBtnEQ = (Button) eqDailog
+						.findViewById(R.id.eqcancelbtn);
 
 				cancelBtnEQ.setOnClickListener(new OnClickListener() {
 
@@ -433,33 +383,23 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 					}
 				});
 
-
 				eqDailog.show();
-
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-
-
 			break;
-
-
 
 		case R.id.engineerdetailsBtn:
 			try {
 				if (isValidated()) {
 
-					JobCardDataBean dataBean=new JobCardDataBean();
+					JobCardDataBean dataBean = new JobCardDataBean();
 
 					dataBean.setJobDate(dateNow);
 
-
-					VarList.JOBCARD_DATE=jobCardNo;
-
-
-
+					VarList.JOBCARD_DATE = jobCardNo;
 
 					dataBean.setVisitReason(visitReason);
 					dataBean.setService(service);
@@ -478,202 +418,201 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 					dataBean.setEqucment(equcment);
 					dataBean.setEqucmentID(eqicmentID);
 
+					if (VarList.SELETCED_BTN
+							.equals(ConstList.UNFINISHED_JOBCARD)) {
 
+						// ----------------------------------
 
-
-					if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
-
-
-						//----------------------------------
-
-						if (customerID==null) {
+						if (customerID == null) {
 							dataBean.setCustomerID(displayBean.getCustomerID());
 
-						}else{
+						} else {
 							dataBean.setCustomerID(customerID);
 						}
-						if (eqicmentID==null) {
+						if (eqicmentID == null) {
 
 							dataBean.setEqucmentID(displayBean.getEqucmentID());
 
-
-						}else{
+						} else {
 							dataBean.setEqucmentID(eqicmentID);
 						}
 
-
-
-
-						//---------------------------------------
-
+						// ---------------------------------------
 
 						dataBean.setCustomerID(displayBean.getCustomerID());
 
-						if (displayBean.getEngBean()!=null) {
+						if (displayBean.getEngBean() != null) {
 							dataBean.setEngBean(displayBean.getEngBean());
 						}
 
-
 					}
 
-
-
-					VarList.JOB_BEAN=dataBean;
+					VarList.JOB_BEAN = dataBean;
 
 					resetFeild();
 
-					Intent call=new Intent(JobCardActivity.this,EngineerTimeDetailsActivity.class);
+					Intent call = new Intent(JobCardActivity.this,
+							EngineerTimeDetailsActivity.class);
 					startActivity(call);
 					JobCardActivity.this.finish();
 
 				}
 
-
-
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			break;
-			//----------------------------------------------------------------------------------------
+		// ----------------------------------------------------------------------------------------
 
 		case R.id.partusedtxt:
 
-			index=1;
-			//			Toast.makeText(this, "part test", Toast.LENGTH_LONG).show();
+			index = 1;
+			// Toast.makeText(this, "part test", Toast.LENGTH_LONG).show();
 			try {
-
-
-
 
 				partDailog = new Dialog(this);
 				partDailog.setContentView(R.layout.partused_layout);
 				partDailog.setCancelable(true);
 				partDailog.setTitle("Add Used Parts");
 
+				partNameTxt = (EditText) partDailog
+						.findViewById(R.id.partNameTxt);
+				partQuantityTxt = (EditText) partDailog
+						.findViewById(R.id.partQuantityTxt);
+				partIDTxt = (EditText) partDailog.findViewById(R.id.partID);
 
-				partNameTxt=(EditText) partDailog.findViewById(R.id.partNameTxt);
-				partQuantityTxt=(EditText) partDailog.findViewById(R.id.partQuantityTxt);
-				partIDTxt=(EditText) partDailog.findViewById(R.id.partID);
-
-				if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) { 
-					partBean=displayBean.getPartBean();
+				if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
+					partBean = displayBean.getPartBean();
 
 					partNameTxt.setText(partBean.get(0).getPartName());
 					partQuantityTxt.setText(partBean.get(0).getPartQuantitys());
 					partIDTxt.setText(partBean.get(0).getPartID());
-					//					partBean.get(0).setFlag("1");
+					// partBean.get(0).setFlag("1");
 
-					SIZE=partBean.size();
+					SIZE = partBean.size();
 
-
-				}else{
-					partBean=new ArrayList<PartsBean>();
+				} else {
+					partBean = new ArrayList<PartsBean>();
 				}
 
-
-
-
-
-				Button cancelBtnEQ=(Button)partDailog.findViewById(R.id.partCloaseBtn);
+				Button cancelBtnEQ = (Button) partDailog
+						.findViewById(R.id.partCloaseBtn);
 				cancelBtnEQ.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-						VarList.PART_BEAN=null;
-						partBean=null;
+						VarList.PART_BEAN = null;
+						partBean = null;
 						partDailog.dismiss();
-
 
 					}
 				});
 
-				Button addNextBtn=(Button)partDailog.findViewById(R.id.partAddNextBtn);
+				Button addNextBtn = (Button) partDailog
+						.findViewById(R.id.partAddNextBtn);
 				addNextBtn.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
 
+						// -----------add next button action here
+						// ----------------
 
-						//-----------add next button action here ----------------
+						// EditText partNameTxt=(EditText)
+						// partDailog.findViewById(R.id.partNameTxt);
+						// EditText partQuantityTxt=(EditText)
+						// partDailog.findViewById(R.id.partQuantityTxt);
 
-						//						EditText partNameTxt=(EditText) partDailog.findViewById(R.id.partNameTxt);
-						//						EditText partQuantityTxt=(EditText) partDailog.findViewById(R.id.partQuantityTxt);
+						String partName = partNameTxt.getText().toString();
+						String partQuantity = partQuantityTxt.getText()
+								.toString();
+						String partID = partIDTxt.getText().toString();
 
-						String partName=partNameTxt.getText().toString();
-						String partQuantity=partQuantityTxt.getText().toString();
-						String partID=partIDTxt.getText().toString();
+						if (VarList.SELETCED_BTN
+								.equals(ConstList.UNFINISHED_JOBCARD)) {
 
-						if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) { 
+							// -----edit part here ---------
 
-							//-----edit part here ---------
-						
-							if (SIZE>index) {
-								partNameTxt.setText(partBean.get(index).getPartName());
-								partQuantityTxt.setText(partBean.get(index).getPartQuantitys());
-								partIDTxt.setText(partBean.get(index).getPartID());
+							if (SIZE > index) {
+								partNameTxt.setText(partBean.get(index)
+										.getPartName());
+								partQuantityTxt.setText(partBean.get(index)
+										.getPartQuantitys());
+								partIDTxt.setText(partBean.get(index)
+										.getPartID());
 								partBean.get(index).setFlag("1");
-							}else if(SIZE==index){
+							} else if (SIZE == index) {
 								partNameTxt.setText("");
 								partQuantityTxt.setText("");
 								partIDTxt.setText("");
 
-							}else{
+							} else {
 
 								if (partName.equals("") || partName == null) {
 
-									Toast.makeText(JobCardActivity.this,MessageClass.PART_NAME_EMPTY ,Toast.LENGTH_LONG).show();
+									Toast.makeText(JobCardActivity.this,
+											MessageClass.PART_NAME_EMPTY,
+											Toast.LENGTH_LONG).show();
 
-								}else if(partQuantity.equals("") || partQuantity == null) {
+								} else if (partQuantity.equals("")
+										|| partQuantity == null) {
 
-									Toast.makeText(JobCardActivity.this,MessageClass.PART_QUANTITY_EMPTY ,Toast.LENGTH_LONG).show();
-								}else if(partID.equals("") || partID == null) {
+									Toast.makeText(JobCardActivity.this,
+											MessageClass.PART_QUANTITY_EMPTY,
+											Toast.LENGTH_LONG).show();
+								} else if (partID.equals("") || partID == null) {
 
-									Toast.makeText(JobCardActivity.this,MessageClass.PART_ID_EMPTY ,Toast.LENGTH_LONG).show();
+									Toast.makeText(JobCardActivity.this,
+											MessageClass.PART_ID_EMPTY,
+											Toast.LENGTH_LONG).show();
 
-								}else{
-									PartsBean bean=new PartsBean();
+								} else {
+									PartsBean bean = new PartsBean();
 									bean.setPartName(partName);
 									bean.setPartID(partID);
 									bean.setPartQuantitys(partQuantity);
 
-									//								partBean.set(index, bean);
+									// partBean.set(index, bean);
 									partBean.add(bean);
-									//								partBean.add(bean);
+									// partBean.add(bean);
 									partNameTxt.setText("");
 									partIDTxt.setText("");
 									partQuantityTxt.setText("");
 
-									//									VarList.PART_BEAN=partBean;
+									// VarList.PART_BEAN=partBean;
 
 								}
 
 							}
 
-							//							partNameTxt.setText(partBean.get(0).getPartName());
-							//							partQuantityTxt.setText(partBean.get(0).getPartQuantitys());
+							// partNameTxt.setText(partBean.get(0).getPartName());
+							// partQuantityTxt.setText(partBean.get(0).getPartQuantitys());
 
-
-							VarList.PART_BEAN=partBean;
+							VarList.PART_BEAN = partBean;
 							index++;
 
-
-						}else {
-
+						} else {
 
 							if (partName.equals("") || partName == null) {
 
-								Toast.makeText(JobCardActivity.this,MessageClass.PART_NAME_EMPTY ,Toast.LENGTH_LONG).show();
+								Toast.makeText(JobCardActivity.this,
+										MessageClass.PART_NAME_EMPTY,
+										Toast.LENGTH_LONG).show();
 
-							}else if(partQuantity.equals("") || partQuantity == null) {
+							} else if (partQuantity.equals("")
+									|| partQuantity == null) {
 
-								Toast.makeText(JobCardActivity.this,MessageClass.PART_QUANTITY_EMPTY ,Toast.LENGTH_LONG).show();
-							}else if(partID.equals("") || partID == null) {
+								Toast.makeText(JobCardActivity.this,
+										MessageClass.PART_QUANTITY_EMPTY,
+										Toast.LENGTH_LONG).show();
+							} else if (partID.equals("") || partID == null) {
 
-								Toast.makeText(JobCardActivity.this,MessageClass.PART_ID_EMPTY ,Toast.LENGTH_LONG).show();
+								Toast.makeText(JobCardActivity.this,
+										MessageClass.PART_ID_EMPTY,
+										Toast.LENGTH_LONG).show();
 
-							}else{
-								PartsBean bean=new PartsBean();
+							} else {
+								PartsBean bean = new PartsBean();
 								bean.setPartName(partName);
 								bean.setPartID(partID);
 								bean.setPartQuantitys(partQuantity);
@@ -684,38 +623,36 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 								partQuantityTxt.setText("");
 								partIDTxt.setText("");
 
-								VarList.PART_BEAN=partBean;
+								VarList.PART_BEAN = partBean;
 
 							}
 
 						}
 
-
 					}
 				});
 
-
-				Button finishButton=(Button)partDailog. findViewById(R.id.partFinishBtn);
+				Button finishButton = (Button) partDailog
+						.findViewById(R.id.partFinishBtn);
 				finishButton.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View arg0) {
 
-
-
 						if (!partBean.isEmpty()) {
 
 							partusedTXT.setText("Add Success");
 							partDailog.dismiss();
-						}else{
+						} else {
 
-							Toast.makeText(JobCardActivity.this, "Please Enter Part Details", Toast.LENGTH_LONG).show();
+							Toast.makeText(JobCardActivity.this,
+									"Please Enter Part Details",
+									Toast.LENGTH_LONG).show();
 						}
 
 					}
 				});
 				partDailog.show();
-
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -723,7 +660,7 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 
 			break;
 
-			//----------------------------------------------------------------------------
+		// ----------------------------------------------------------------------------
 
 		case R.id.closebtn:
 
@@ -735,32 +672,22 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 			break;
 
 		case R.id.closesaveBtn:
-			boolean isItwork=false;
-
-
-
-
-
-
+			boolean isItwork = false;
 
 			try {
 
-
 				if (isValidated()) {
 
-					isItwork=true;
-					JobCardDataBean dataBean=new JobCardDataBean();
+					isItwork = true;
+					JobCardDataBean dataBean = new JobCardDataBean();
 
 					dataBean.setJobDate(dateNow);
 
-
-					VarList.JOBCARD_DATE=jobCardNo;
-					if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
-
-
+					VarList.JOBCARD_DATE = jobCardNo;
+					if (VarList.SELETCED_BTN
+							.equals(ConstList.UNFINISHED_JOBCARD)) {
 
 					}
-
 
 					dataBean.setCustomer(customer);
 					dataBean.setEqucment(equcment);
@@ -776,240 +703,236 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 					dataBean.setJobCardNO(jobCardNo);
 					dataBean.setDownTime(downTime);
 
-					if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
+					if (VarList.SELETCED_BTN
+							.equals(ConstList.UNFINISHED_JOBCARD)) {
 
-						if (customerID==null) {
+						if (customerID == null) {
 							dataBean.setCustomerID(displayBean.getCustomerID());
 
-						}else{
+						} else {
 							dataBean.setCustomerID(customerID);
 						}
-						if (eqicmentID==null) {
+						if (eqicmentID == null) {
 
 							dataBean.setEqucmentID(displayBean.getEqucmentID());
 
-
-						}else{
+						} else {
 							dataBean.setEqucmentID(eqicmentID);
 						}
-					}else {
+					} else {
 						dataBean.setCustomerID(customerID);
 						dataBean.setEqucmentID(eqicmentID);
 					}
 
+					VarList.JOB_BEAN = dataBean;
 
-
-
-					VarList.JOB_BEAN=dataBean;
-
-
-					JobCardDBAccess dbClass=new JobCardDBAccess(this);
+					JobCardDBAccess dbClass = new JobCardDBAccess(this);
 
 					dbClass.openDB();
 
-					if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
+					if (VarList.SELETCED_BTN
+							.equals(ConstList.UNFINISHED_JOBCARD)) {
 
-						dbClass.updateFirstDB(VarList.JOB_BEAN,Long.parseLong(VarList.SELECTED_ID));
+						dbClass.updateFirstDB(VarList.JOB_BEAN,
+								Long.parseLong(VarList.SELECTED_ID));
 
-
-					}else{
+					} else {
 						dbClass.insertFirstDB(VarList.JOB_BEAN);
 
 					}
 					dbClass.closeDB();
 
-
 				}
 			} catch (Exception e) {
 
-				isItwork=false;
+				isItwork = false;
 				e.printStackTrace();
-			}finally{
+			} finally {
 				resetFeild();
 
 				if (isItwork) {
 
-					if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
-						Toast.makeText(this,MessageClass.JOBCARD_UPDATE_LOCAL_PART_SUCCESS ,Toast.LENGTH_LONG).show();
+					if (VarList.SELETCED_BTN
+							.equals(ConstList.UNFINISHED_JOBCARD)) {
+						Toast.makeText(this,
+								MessageClass.JOBCARD_UPDATE_LOCAL_PART_SUCCESS,
+								Toast.LENGTH_LONG).show();
 
-						VarList.JOB_BEAN=null;
+						VarList.JOB_BEAN = null;
 
-
-						Intent call=new Intent(JobCardActivity.this,MianMenuActivity.class);
+						Intent call = new Intent(JobCardActivity.this,
+								MianMenuActivity.class);
 						startActivity(call);
 						JobCardActivity.this.finish();
 
+					} else {
+						Toast.makeText(this,
+								MessageClass.JOBCARD_UPLOAD_LOCAL_PART_SUCCESS,
+								Toast.LENGTH_LONG).show();
 
-					}else {
-						Toast.makeText(this,MessageClass.JOBCARD_UPLOAD_LOCAL_PART_SUCCESS ,Toast.LENGTH_LONG).show();
+						VarList.JOB_BEAN = null;
 
-						VarList.JOB_BEAN=null;
-
-
-						Intent call=new Intent(JobCardActivity.this,MianMenuActivity.class);
+						Intent call = new Intent(JobCardActivity.this,
+								MianMenuActivity.class);
 						startActivity(call);
 						JobCardActivity.this.finish();
 
 					}
 				} else {
 
-					Toast.makeText(this,MessageClass.JOBCARD_FIAL_LOCAL_SUCCESS ,Toast.LENGTH_LONG).show();
+					Toast.makeText(this,
+							MessageClass.JOBCARD_FIAL_LOCAL_SUCCESS,
+							Toast.LENGTH_LONG).show();
 
 				}
 
-				//				}
-
-
-
-
+				// }
 
 			}
 
 			break;
 
-
-
 		default:
 			break;
 		}
 
-
-
 	}
-
 
 	/*
 	 * back button pressed action
 	 */
 
-	private void backBtnPressedAction(){
-		if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD) ){
+	private void backBtnPressedAction() {
+		if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
 
-			Intent call=new Intent(JobCardActivity.this,UnfinishedJobCardActivity.class);
+			Intent call = new Intent(JobCardActivity.this,
+					UnfinishedJobCardActivity.class);
 			startActivity(call);
 			JobCardActivity.this.finish();
 
-		}else if (VarList.SELETCED_BTN.equals(ConstList.CREATE_JOBCARD)){ 
+		} else if (VarList.SELETCED_BTN.equals(ConstList.CREATE_JOBCARD)) {
 
 			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 					this);
 
-
 			alertDialogBuilder.setTitle("Warning");
 
-
 			alertDialogBuilder
-			.setMessage("If you go back this job card will be lost")
-			.setCancelable(false)
-			.setPositiveButton("Go to home",new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int id) {
+					.setMessage("If you go back this job card will be lost")
+					.setCancelable(false)
+					.setPositiveButton("Go to home",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
 
-					VarList.JOB_BEAN=null;
+									VarList.JOB_BEAN = null;
 
-					Intent call=new Intent(JobCardActivity.this,MianMenuActivity.class);
-					startActivity(call);
-					JobCardActivity.this.finish();
+									Intent call = new Intent(
+											JobCardActivity.this,
+											MianMenuActivity.class);
+									startActivity(call);
+									JobCardActivity.this.finish();
 
-				}
-			})
-			.setNegativeButton("Close",new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int id) {
+								}
+							})
+					.setNegativeButton("Close",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
 
-					dialog.cancel();
-				}
-			});
-
+									dialog.cancel();
+								}
+							});
 
 			AlertDialog alertDialog = alertDialogBuilder.create();
-
 
 			alertDialog.show();
 		}
 
 	}
 
-	private Boolean isValidated(){
-		Boolean flag=true;
+	private Boolean isValidated() {
+		Boolean flag = true;
 		try {
 
+			jobCardNo = jobCardNoTXT.getText().toString();
+			customer = customerTXT.getText().toString();
+			equcment = eqicType.getText().toString();
+			visitReason = visitReasonTXT.getText().toString();
+			service = serviceTxt.getText().toString();
+			partUsed = partusedTXT.getText().toString();
+			filamnetCounter = fileamentCounterTXT.getText().toString();
+			hvCounter = hvCounterTXT.getText().toString();
+			logTime = logTimeTXT.getText().toString();
+			downTime = downtimeTXT.getText().toString();
 
+			VarList.JOBCARD_DATE = jobCardNo;
 
-			jobCardNo=jobCardNoTXT.getText().toString();
-			customer=customerTXT.getText().toString();
-			equcment=eqicType.getText().toString();
-			visitReason=visitReasonTXT.getText().toString();
-			service=serviceTxt.getText().toString();
-			partUsed=partusedTXT.getText().toString();
-			filamnetCounter=fileamentCounterTXT.getText().toString();
-			hvCounter=hvCounterTXT.getText().toString();
-			logTime=logTimeTXT.getText().toString();
-			downTime =downtimeTXT.getText().toString();
+			if (jobCardNo == null || jobCardNo.equals("")) {
 
-
-
-
-
-
-			VarList.JOBCARD_DATE=jobCardNo;
-
-			if (jobCardNo==null  || jobCardNo.equals("")) { 
-
-				Toast.makeText(this,MessageClass.ORDER_NO_EMPTY ,Toast.LENGTH_LONG).show();
-				flag=false;
+				Toast.makeText(this, MessageClass.ORDER_NO_EMPTY,
+						Toast.LENGTH_LONG).show();
+				flag = false;
 			}
 
-			else if (customer==null  || customer.equals("")) { 
+			else if (customer == null || customer.equals("")) {
 
-				Toast.makeText(this,MessageClass.CUSTOMER_EMPTY ,Toast.LENGTH_LONG).show();
-				flag=false;
+				Toast.makeText(this, MessageClass.CUSTOMER_EMPTY,
+						Toast.LENGTH_LONG).show();
+				flag = false;
 
-			} else if (equcment==null  || equcment.equals("")) { 
+			} else if (equcment == null || equcment.equals("")) {
 
-				Toast.makeText(this,MessageClass.EQUICKMENT_EMPTY ,Toast.LENGTH_LONG).show();
-				flag=false;
+				Toast.makeText(this, MessageClass.EQUICKMENT_EMPTY,
+						Toast.LENGTH_LONG).show();
+				flag = false;
 
-			}else if (visitReason==null  || visitReason.equals("")) { 
+			} else if (visitReason == null || visitReason.equals("")) {
 
-				Toast.makeText(this,MessageClass.VISIT_EMPTY ,Toast.LENGTH_LONG).show();
-				flag=false;
+				Toast.makeText(this, MessageClass.VISIT_EMPTY,
+						Toast.LENGTH_LONG).show();
+				flag = false;
 
-			}else if (service==null  || service.equals("")) { 
+			} else if (service == null || service.equals("")) {
 
-				Toast.makeText(this,MessageClass.SERVICE_EMPTY ,Toast.LENGTH_LONG).show();
-				flag=false;
+				Toast.makeText(this, MessageClass.SERVICE_EMPTY,
+						Toast.LENGTH_LONG).show();
+				flag = false;
 
-				//			}else if (partUsed==null  || partUsed.equals("")) { 
+				// }else if (partUsed==null || partUsed.equals("")) {
 				//
-				//				Toast.makeText(this,MessageClass.VISIT_EMPTY ,Toast.LENGTH_LONG).show();
-				//				flag=false;
+				// Toast.makeText(this,MessageClass.VISIT_EMPTY
+				// ,Toast.LENGTH_LONG).show();
+				// flag=false;
 
-			}else if (filamnetCounter==null  || filamnetCounter.equals("")) { 
+			} else if (filamnetCounter == null || filamnetCounter.equals("")) {
 
-				Toast.makeText(this,MessageClass.FIL_COUNTER_EMPTY ,Toast.LENGTH_LONG).show();
-				flag=false;
+				Toast.makeText(this, MessageClass.FIL_COUNTER_EMPTY,
+						Toast.LENGTH_LONG).show();
+				flag = false;
 
-			}else if (hvCounter==null  || hvCounter.equals("")) { 
+			} else if (hvCounter == null || hvCounter.equals("")) {
 
-				Toast.makeText(this,MessageClass.HV_COUNTER_EMPTY ,Toast.LENGTH_LONG).show();
-				flag=false;
+				Toast.makeText(this, MessageClass.HV_COUNTER_EMPTY,
+						Toast.LENGTH_LONG).show();
+				flag = false;
 
-			}else if (logTime==null  || logTime.equals("")) { 
+			} else if (logTime == null || logTime.equals("")) {
 
-				Toast.makeText(this,MessageClass.LOG_TIMEE_EMPTY ,Toast.LENGTH_LONG).show();
-				flag=false;
+				Toast.makeText(this, MessageClass.LOG_TIMEE_EMPTY,
+						Toast.LENGTH_LONG).show();
+				flag = false;
 
-			}else if (downTime==null  || downTime.equals("")) { 
+			} else if (downTime == null || downTime.equals("")) {
 
-				Toast.makeText(this,MessageClass.DOWN_TIMEE_EMPTY ,Toast.LENGTH_LONG).show();
-				flag=false;
+				Toast.makeText(this, MessageClass.DOWN_TIMEE_EMPTY,
+						Toast.LENGTH_LONG).show();
+				flag = false;
 
-			}else{
+			} else {
 
-
-				flag=true;
+				flag = true;
 			}
-
-
 
 			return flag;
 		} catch (Exception e) {
@@ -1018,27 +941,20 @@ public class JobCardActivity extends Activity implements OnTouchListener, OnClic
 
 		}
 
-
-
-
-
-
 	}
 
+	private void resetFeild() {
 
-
-	private void resetFeild(){
-
-		jobCardNo="";
-		customer="";
-		equcment="";
-		visitReason="";
-		service="";
-		partUsed="";
-		filamnetCounter="";
-		hvCounter="";
-		logTime="";
-		downTime ="";
+		jobCardNo = "";
+		customer = "";
+		equcment = "";
+		visitReason = "";
+		service = "";
+		partUsed = "";
+		filamnetCounter = "";
+		hvCounter = "";
+		logTime = "";
+		downTime = "";
 	}
 
 }

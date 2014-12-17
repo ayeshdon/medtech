@@ -53,7 +53,7 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 
 	private Spinner eng1Spinner;
 	private View layout;
-	private String eng1Name="",eng1ID="";
+//	private String eng1Name="",eng1ID="";
 
 
 	private LinearLayout engContent;
@@ -76,6 +76,7 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 	private File directory;
 
 	private int index=1,key=1;
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -103,8 +104,6 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 
 
 		engUniqueId =getTodaysDate() + getCurrentTime() + Math.random()+VarList.USER_NAME+"eng";
-		//		engCurrent = engUniqueId + ".png";
-		//		engmypath = new File(directory,engCurrent);
 
 
 		engContent = (LinearLayout) findViewById(R.id.egineerSignaturelayout1);
@@ -128,11 +127,6 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 					int hour24, int hour12, int min, int sec,
 					String AM_PM) {
 
-				//						eng1Date.setText( calendarSelected
-				//												.get(Calendar.DAY_OF_MONTH)
-				//										+ ":" + monthShortName + ":" + year
-				//										+ ":" + hour24 + ":" + min
-				//										+ " " + AM_PM);
 			}
 
 			@Override
@@ -227,7 +221,7 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 
 
 
-		ArrayAdapter<String> spinnerList1 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, eng_name);
+		ArrayAdapter<String> spinnerList1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, eng_name);
 		spinnerList1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		eng1Spinner.setAdapter(spinnerList1);
 
@@ -393,8 +387,8 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 		switch (v.getId()) {
 		case R.id.spinnerEng1:
 
-			eng1Name=VarList.ENGINEER_LIST.get(pos).getEngName();
-			eng1ID=VarList.ENGINEER_LIST.get(pos).getID();
+//			eng1Name=VarList.ENGINEER_LIST.get(pos).getEngName();
+//			eng1ID=VarList.ENGINEER_LIST.get(pos).getID();
 
 			break;
 
@@ -439,11 +433,6 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 						if (index<=SIZE) { 
 
 
-//							eng1Spinner.setEnabled(false);
-//							eng1JobStart.setEnabled(false);
-//							eng1Jobend.setEnabled(false);
-//							eng1TimeTravel.setEnabled(false);
-//							eng1Timework.setEnabled(false);
 							//-----------------------------------------------
 							//							engBean.remove(index);
 							EngineerDataBean bean1=new EngineerDataBean();
@@ -743,9 +732,6 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 
 				Toast.makeText(this,MessageClass.ENGINEER_NAME_EMPTY ,Toast.LENGTH_LONG).show();
 
-				//			}else if(eng1Date.getText().toString()==null || eng1Date.getText().toString().equals("")){
-				//
-				//				Toast.makeText(this,MessageClass.ENGINEER_DATE_EMPTY ,Toast.LENGTH_LONG).show();
 			}else if(eng1JobStart.getText().toString()==null || eng1JobStart.getText().toString().equals("")){
 
 				Toast.makeText(this,MessageClass.ENGINEER_JOBSTART_EMPTY ,Toast.LENGTH_LONG).show();
@@ -883,7 +869,6 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 				}
 				catch(Exception e) 
 				{ 
-					//Log.v("log_tag", "5555555555555555555555555555555555");
 					e.printStackTrace();
 					returnPath ="";
 				} 

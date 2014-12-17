@@ -3,7 +3,7 @@ package com.hseya.medtech.jobcard.activity;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -20,6 +20,7 @@ import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 import android.widget.ViewSwitcher;
 
+@SuppressLint("SimpleDateFormat")
 public class CustomDateTimePicker implements OnClickListener {
 	private DatePicker datePicker;
 	private TimePicker timePicker;
@@ -270,7 +271,6 @@ public class CustomDateTimePicker implements OnClickListener {
 				int year = datePicker.getYear();
 				int day = datePicker.getDayOfMonth();
 
-
 				calendar_date.set(year, month, day, selectedHour,
 						selectedMinute);
 
@@ -316,6 +316,7 @@ public class CustomDateTimePicker implements OnClickListener {
 	 *            <b>d MMMM yyyy</b>
 	 * @return formatted date
 	 */
+	@SuppressLint("SimpleDateFormat")
 	public static String convertDate(String date, String fromFormat,
 			String toFormat) {
 		try {
@@ -335,6 +336,7 @@ public class CustomDateTimePicker implements OnClickListener {
 		return date;
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	private String getMonthFullName(int monthNumber) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.MONTH, monthNumber);
@@ -346,6 +348,7 @@ public class CustomDateTimePicker implements OnClickListener {
 		return monthName;
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	private String getMonthShortName(int monthNumber) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.MONTH, monthNumber);
@@ -357,6 +360,7 @@ public class CustomDateTimePicker implements OnClickListener {
 		return monthName;
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	private String getWeekDayFullName(int weekDayNumber) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.DAY_OF_WEEK, weekDayNumber);
