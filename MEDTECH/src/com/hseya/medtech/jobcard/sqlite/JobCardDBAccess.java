@@ -961,6 +961,45 @@ public class JobCardDBAccess {
 	}
 
 
+	
+	/*
+	 * get item according to customer id
+	 */
+	public ArrayList<EquickmentBean> getAllItemsWithCusID(String cusID) { 
+		ArrayList<EquickmentBean>dataList=new ArrayList<EquickmentBean>();
+		try{
+			
+			String[] colums=new String[]{KEY_ID,EQUIPMENTID,EQUIPMENTTYPE};
+			
+			Cursor cus=DB.query(ITEMS, colums, CUSTOMER +" =?", new String[]{cusID}, null, null, null);
+			
+//			int EqID=cus.getColumnIndex(EQUIPMENTID);
+//			int eqType=cus.getColumnIndex(EQUIPMENTTYPE);
+			
+			for(cus.moveToFirst();!cus.isAfterLast();cus.moveToNext()){
+				EquickmentBean testBean=new EquickmentBean();
+				testBean.setID(cus.getString(cus.getColumnIndex(EQUIPMENTID)));
+				testBean.setName(cus.getString(cus.getColumnIndex(EQUIPMENTTYPE)));
+				dataList.add(testBean);
+			}
+			
+			if (cus != null && !cus.isClosed()) {
+				cus.close();
+			} 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dataList;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	 * insert customers db
 	 */

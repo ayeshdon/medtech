@@ -156,6 +156,7 @@
                 android:text="@string/signatureeng" />
 
             <LinearLayout
+                android:orientation="horizontal"
                 android:id="@+id/egineerSignaturelayout1"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"

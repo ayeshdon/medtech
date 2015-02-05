@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,8 +29,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.hseya.medtech.MianMenuActivity;
 import com.hseya.medtech.R;
+import com.hseya.medtech.jobcard.bean.EquickmentBean;
 import com.hseya.medtech.jobcard.bean.JobCardDataBean;
 import com.hseya.medtech.jobcard.bean.PartsBean;
 import com.hseya.medtech.jobcard.sqlite.JobCardDBAccess;
@@ -258,6 +261,14 @@ public class JobCardActivity extends Activity implements OnTouchListener,
 					@Override
 					public void onItemClick(AdapterView<?> parent, View arg1,
 							int position, long arg3) {
+						
+						
+						//-----------------
+
+						eqicType.setText("");
+						eqicmentID = "";
+						//-----------------
+						
 						customerTXT.setText(parent.getItemAtPosition(position)
 								.toString());
 
@@ -324,6 +335,28 @@ public class JobCardActivity extends Activity implements OnTouchListener,
 
 				ArrayList<String> EQ_name = new ArrayList<String>();
 
+				
+				//----------------------
+				System.out.println("----");
+				System.out.println("customer id : "+customerID);
+				System.out.println("----");
+
+				ArrayList<EquickmentBean> addEQBean=new ArrayList<EquickmentBean>();
+
+				JobCardDBAccess dbClass=new JobCardDBAccess(JobCardActivity.this);
+
+				dbClass.openDB();
+
+				addEQBean=dbClass.getAllItemsWithCusID(customerID);
+
+				dbClass.closeDB();
+				
+				
+
+
+				VarList.EQCIPMENTS_LIST=addEQBean;
+				
+				//----------------------
 				for (int i = 0; i < VarList.EQCIPMENTS_LIST.size(); i++) {
 					EQ_name.add(VarList.EQCIPMENTS_LIST.get(i).getName());
 
