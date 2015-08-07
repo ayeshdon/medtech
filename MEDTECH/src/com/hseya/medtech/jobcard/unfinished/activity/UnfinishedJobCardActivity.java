@@ -6,8 +6,10 @@ import java.util.List;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,6 +50,17 @@ public class UnfinishedJobCardActivity extends Activity implements
 			listView = (ListView) findViewById(R.id.listviewdisplay);
 			listView.setOnItemClickListener(this);
 
+			setupList();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	private void setupList() {
+		try {
+			
 			JobCardDBAccess sqlObj = new JobCardDBAccess(this);
 
 			sqlObj.openDB();
@@ -64,44 +77,114 @@ public class UnfinishedJobCardActivity extends Activity implements
 			sqlObj.closeDB();
 
 			setAdapterToListview();
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
+	
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+	public void onItemClick(AdapterView<?> arg0, View arg1, final int pos, long arg3) {
 
-		VarList.SELECTED_ID = arrayOfList.get(pos).getKeyID();
-		VarList.SELECTED_ID_VAL = arrayOfList.get(pos).getVal();
+		
+		
 
-		if (VarList.SELETCED_BTN.equals(ConstList.FINISHED_JOBCARD)) {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder.setTitle(this.getTitle()+ " decision");
+		alertDialogBuilder.setMessage("Are you sure?");
+		alertDialogBuilder.setPositiveButton("Open",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
 
-			JobCardDBAccess db = new JobCardDBAccess(this);
 
-			db.openDB();
-			VarList.UPLOADBEAN = db.getAllDetails(arrayOfList.get(pos)
-					.getKeyID());
-			db.closeDB();
+				openJobCard(pos);
+			} 
 
-			ConnectionDetector con = new ConnectionDetector(this);
+		});
 
-			if (con.isConnectingToInternet()) {
-				new PostToServerEng().execute("");
-			} else {
-				Toast.makeText(UnfinishedJobCardActivity.this,
-						MessageClass.NO_INTERNET, Toast.LENGTH_LONG).show();
+		alertDialogBuilder.setNegativeButton("Close",new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog,int id) {
+
+				dialog.cancel();
+
+				dialog.dismiss();
+
+
+
 			}
 
-		} else if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
+		});
 
-			Intent call = new Intent(UnfinishedJobCardActivity.this,
-					JobCardActivity.class);
-			startActivity(call);
-			UnfinishedJobCardActivity.this.finish();
+		alertDialogBuilder.setNeutralButton("Delete",new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialdeleteAllog,int id) {
+
+				if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD) ){
+
+
+					JobCardDBAccess db=new JobCardDBAccess(UnfinishedJobCardActivity.this);
+					db.deleteAll(arrayOfList.get(pos).getKeyID());
+
+					setupList();
+
+
+				}
+			}
+
+			
+		});
+
+
+
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show alert
+
+		alertDialog.show();
+
+	}
+
+	private void openJobCard(int pos) {
+		try {
+			
+			
+			VarList.SELECTED_ID = arrayOfList.get(pos).getKeyID();
+			VarList.SELECTED_ID_VAL = arrayOfList.get(pos).getVal();
+
+			if (VarList.SELETCED_BTN.equals(ConstList.FINISHED_JOBCARD)) {
+
+				JobCardDBAccess db = new JobCardDBAccess(this);
+
+				db.openDB();
+				VarList.UPLOADBEAN = db.getAllDetails(arrayOfList.get(pos)
+						.getKeyID());
+				db.closeDB();
+
+				ConnectionDetector con = new ConnectionDetector(this);
+
+				if (con.isConnectingToInternet()) {
+					new PostToServerEng().execute("");
+				} else {
+					Toast.makeText(UnfinishedJobCardActivity.this,
+							MessageClass.NO_INTERNET, Toast.LENGTH_LONG).show();
+				}
+
+			} else if (VarList.SELETCED_BTN.equals(ConstList.UNFINISHED_JOBCARD)) {
+
+				Intent call = new Intent(UnfinishedJobCardActivity.this,
+						JobCardActivity.class);
+				startActivity(call);
+				UnfinishedJobCardActivity.this.finish();
+			}
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
+		
 	}
 
 	public void setAdapterToListview() {

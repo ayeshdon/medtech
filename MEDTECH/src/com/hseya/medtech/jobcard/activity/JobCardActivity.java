@@ -63,11 +63,7 @@ public class JobCardActivity extends Activity implements OnTouchListener,
 
 	private JobCardDataBean displayBean;
 
-	// -----------------------------------
-
 	private ArrayList<PartsBean> partBean;
-
-	// -------------------------------------
 	CustomDateTimePicker custom;
 	private int SIZE = 0;
 
@@ -336,11 +332,6 @@ public class JobCardActivity extends Activity implements OnTouchListener,
 				ArrayList<String> EQ_name = new ArrayList<String>();
 
 				
-				//----------------------
-				System.out.println("----");
-				System.out.println("customer id : "+customerID);
-				System.out.println("----");
-
 				ArrayList<EquickmentBean> addEQBean=new ArrayList<EquickmentBean>();
 
 				JobCardDBAccess dbClass=new JobCardDBAccess(JobCardActivity.this);
@@ -350,9 +341,6 @@ public class JobCardActivity extends Activity implements OnTouchListener,
 				addEQBean=dbClass.getAllItemsWithCusID(customerID);
 
 				dbClass.closeDB();
-				
-				
-
 
 				VarList.EQCIPMENTS_LIST=addEQBean;
 				

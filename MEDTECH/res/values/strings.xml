@@ -57,7 +57,7 @@
      <string name="savenclose">Save and Close</string>
      <string name="signuploadBtn">Upload to Server</string>
      <string name="add_new_engineer">Add New Engineer</string>
-     <string name="unfinished_jobcard">Unfinished Job Cards OK</string>
+     <string name="unfinished_jobcard">Unfinished Job Cards</string>
      <string name="syncItem">Sync Item</string>
      <string name="Sync_eng">Sync Engineer Details</string>
      <string name="cusSync">Sync Customer</string>

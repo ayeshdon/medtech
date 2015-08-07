@@ -295,11 +295,11 @@ public class EngineerTimeDetailsActivity extends Activity implements OnItemSelec
 					
 					
 					//--------------------------------
-					eng1Spinner.setEnabled(false);
-					eng1JobStart.setEnabled(false);
-					eng1Jobend.setEnabled(false);
-					eng1TimeTravel.setEnabled(false);
-					eng1Timework.setEnabled(false);
+//					eng1Spinner.setEnabled(false);
+//					eng1JobStart.setEnabled(false);
+//					eng1Jobend.setEnabled(false);
+//					eng1TimeTravel.setEnabled(false);
+//					eng1Timework.setEnabled(false);
 					
 					//---------------------------------
 				}

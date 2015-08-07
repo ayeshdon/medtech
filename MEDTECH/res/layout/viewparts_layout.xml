@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="@string/partid"
             android:textStyle="bold" />
-
+
         <EditText
             android:id="@+id/viewPartIDTxt"
             android:layout_width="match_parent"

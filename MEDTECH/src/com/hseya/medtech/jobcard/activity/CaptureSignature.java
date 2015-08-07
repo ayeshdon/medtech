@@ -82,12 +82,16 @@ public class CaptureSignature extends Activity implements OnClickListener {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.signature);
 
+		databean = VarList.JOB_BEAN;
+		
 		viewPartsBtn = (Button) findViewById(R.id.viewParts);
 		viewPartsBtn.setOnClickListener(this);
 
 		visualCheck = (CheckBox) findViewById(R.id.visualChck);
 		visualCheck.setOnClickListener(this);
 		inspectionCheck = (CheckBox) findViewById(R.id.inspectionChck);
+		inspectionCheck.setChecked(true);
+		databean.setInspectionCheck("Y");
 		inspectionCheck.setOnClickListener(this);
 
 		viewEngBtn = (Button) findViewById(R.id.viewEng);
@@ -99,7 +103,8 @@ public class CaptureSignature extends Activity implements OnClickListener {
 		saveLocalBtn = (Button) findViewById(R.id.saveLocalBtn);
 		saveLocalBtn.setOnClickListener(this);
 
-		databean = VarList.JOB_BEAN;
+		
+	
 		tempDir = Environment.getExternalStorageDirectory() + "/"
 				+ getResources().getString(R.string.external_dir) + "/";
 
