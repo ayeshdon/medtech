@@ -107,7 +107,7 @@
 
         <requestFocus />
     </EditText>
-
+
     <CheckBox
         android:id="@+id/inspectionChck"
         android:layout_width="match_parent"
@@ -115,7 +115,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="@string/inspection" />
-
+
     <CheckBox
         android:id="@+id/visualChck"
         android:layout_width="match_parent"

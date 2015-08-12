@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/bg_color"
     android:orientation="vertical" >
-
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="@string/eng_name" />
-
+
             <EditText
                 android:id="@+id/viewEngName"
                 android:layout_width="match_parent"
@@ -33,19 +33,19 @@
             </EditText>
 
         </LinearLayout>
-
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical" >
-
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/JobStart" />
-
+
             <EditText
                 android:id="@+id/viewEngStartDate"
                 android:layout_width="match_parent"
@@ -57,19 +57,19 @@
                 android:inputType="date" />
 
         </LinearLayout>
-
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical" >
-
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/JobFinished" />
-
+
             <EditText
                 android:id="@+id/viewEngFinishDate"
                 android:layout_width="match_parent"
@@ -80,19 +80,19 @@
                 android:inputType="date" />
 
         </LinearLayout>
-
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical" >
-
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/TimeWorked" />
-
+
             <EditText
                 android:id="@+id/viewTimeworkedEng"
                 android:layout_width="match_parent"
@@ -101,19 +101,19 @@
                 android:inputType="date" />
 
         </LinearLayout>
-
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical" >
-
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/traveTime" />
-
+
             <EditText
                 android:id="@+id/viewTravelTimeEng"
                 android:layout_width="match_parent"
@@ -124,20 +124,20 @@
         </LinearLayout>
 
         <!-- button group -->
-
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp" >
-
+
             <Button
                 android:id="@+id/viewengineerBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/viewengbtn" />
-
+
             <Button
                 android:id="@+id/viewEngClosebtn"
                 android:layout_width="wrap_content"

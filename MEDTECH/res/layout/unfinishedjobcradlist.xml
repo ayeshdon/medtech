@@ -8,12 +8,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         layout="@layout/header_layout" />
-
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+
     <ListView
         android:id="@+id/listviewdisplay"
         android:layout_width="fill_parent"
